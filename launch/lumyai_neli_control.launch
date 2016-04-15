@@ -5,7 +5,7 @@
 
   <!-- load the controllers -->
   <!--
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/lumyai_neli" args="
+  <node name="controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" ns="/lumyai_neli" args="spawn
             right_shoulder_1_joint_position_controller
             right_shoulder_2_joint_position_controller
             right_elbow_joint_position_controller
@@ -29,7 +29,7 @@
   </node>
   -->
 
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/lumyai_neli" args="
+  <node name="controller_manager" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" ns="/lumyai_neli" args="spawn
             right_shoulder_1_joint_position_controller
             right_shoulder_2_joint_position_controller
             right_elbow_joint_position_controller
