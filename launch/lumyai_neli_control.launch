@@ -1,0 +1,64 @@
+<launch>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find athome_simulation)/robots/motor.yaml" command="load"/>
+
+  <!-- load the controllers -->
+  <!--
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/lumyai_neli" args="
+            right_shoulder_1_joint_position_controller
+            right_shoulder_2_joint_position_controller
+            right_elbow_joint_position_controller
+            right_wrist_1_joint_position_controller
+            right_wrist_2_joint_position_controller
+            right_wrist_3_joint_position_controller
+            right_gripper_joint_position_controller
+
+            left_shoulder_1_joint_position_controller
+            left_shoulder_2_joint_position_controller
+            left_elbow_joint_position_controller
+            left_wrist_1_joint_position_controller
+            left_wrist_2_joint_position_controller
+            left_wrist_3_joint_position_controller
+            left_gripper_joint_position_controller
+
+            pan_joint_position_controller 
+            tilt_joint_position_controller 
+            
+            joint_state_controller">
+  </node>
+  -->
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/lumyai_neli" args="
+            right_shoulder_1_joint_position_controller
+            right_shoulder_2_joint_position_controller
+            right_elbow_joint_position_controller
+            right_wrist_1_joint_position_controller
+            right_wrist_2_joint_position_controller
+            right_wrist_3_joint_position_controller
+            right_gripper_joint_position_controller
+
+            left_shoulder_1_joint_position_controller
+            left_shoulder_2_joint_position_controller
+            left_elbow_joint_position_controller
+            left_wrist_1_joint_position_controller
+            left_wrist_2_joint_position_controller
+            left_wrist_3_joint_position_controller
+            left_gripper_joint_position_controller
+
+
+            pan_joint_position_controller 
+            tilt_joint_position_controller 
+            
+            joint_state_controller
+            ">
+  </node>
+
+
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/dynamixel/joint_states" />
+  </node>
+
+</launch>

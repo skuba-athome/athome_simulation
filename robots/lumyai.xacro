@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 
 <robot name="lumyai_neli" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:include filename="$(find lumyai_descriptions)/robots/lumyai_neli.URDF" />
-    
+
     <gazebo>
         <plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
             <commandTopic>cmd_vel</commandTopic>
@@ -28,10 +27,6 @@
                 <box size="0.1 0.1 0.1"/>
             </geometry>
         </collision>
-
-        <visual>
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </visual>
 
         <inertial>
             <mass value="1e-5" />
@@ -67,7 +62,7 @@
                             stddev of 0.01m will put 99.7% of samples within 0.03m of the true
                             reading. -->
                     <mean>0.0</mean>
-                    <stddev>0.01</stddev>
+                    <stddev>0.005</stddev>
                 </noise>
             </ray>
             <plugin name="gazebo_ros_hokuyo_controller" filename="libgazebo_ros_laser.so">
@@ -76,5 +71,48 @@
             </plugin>
         </sensor>
     </gazebo>
+
+
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/lumyai_neli</robotNamespace>
+        </plugin>
+    </gazebo>
+
+
+    <xacro:macro name="joint_motor" params="joint_name id">
+        <transmission name="tran_${joint_name}">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${joint_name}">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="motor_${id}">
+                <hardwareInterface>EffortJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
+
+    <xacro:joint_motor joint_name="pan_joint" id="10"/>
+    <xacro:joint_motor joint_name="tilt_joint" id="11"/>
+
+    <xacro:joint_motor joint_name="right_shoulder_1_joint" id="30"/>
+    <xacro:joint_motor joint_name="right_shoulder_2_joint" id="31"/>
+    <xacro:joint_motor joint_name="right_elbow_joint" id="32"/>
+    <xacro:joint_motor joint_name="right_wrist_1_joint" id="40"/>
+    <xacro:joint_motor joint_name="right_wrist_2_joint" id="41"/>
+    <xacro:joint_motor joint_name="right_wrist_3_joint" id="42"/>
+    <xacro:joint_motor joint_name="right_gripper_joint" id="43"/>
+
+    <xacro:joint_motor joint_name="left_shoulder_1_joint" id="35"/>
+    <xacro:joint_motor joint_name="left_shoulder_2_joint" id="36"/>
+    <xacro:joint_motor joint_name="left_elbow_joint" id="37"/>
+    <xacro:joint_motor joint_name="left_wrist_1_joint" id="45"/>
+    <xacro:joint_motor joint_name="left_wrist_2_joint" id="46"/>
+    <xacro:joint_motor joint_name="left_wrist_3_joint" id="47"/>
+    <xacro:joint_motor joint_name="left_gripper_joint" id="48"/>
+
+    <xacro:include filename="$(find lumyai_descriptions)/robots/lumyai_neli.URDF" />
 
 </robot>

@@ -1,7 +1,7 @@
 <launch>
 
     <arg name="use_sim_time" default="true"/>
-    <arg name="gui" default="false"/>
+    <arg name="gui" default="true"/>
 
 	<include file="$(find gazebo_ros)/launch/empty_world.launch">
 		<arg name="world_name" value="$(find athome_simulation)/worlds/athome_simulation.world"/>
@@ -12,4 +12,9 @@
     <param name="robot_description" command="$(find xacro)/xacro.py $(find athome_simulation)/robots/lumyai.xacro"/>
 
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model lumyai_neli -param robot_description"/>
+
+    <!--
+    <include file="$(find athome_simulation)/launch/lumyai_neli_control.launch"/>
+    -->
+    <include file="$(find athome_simulation)/launch/lumyai_neli_control.launch"/>
 </launch>
